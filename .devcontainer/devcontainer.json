@@ -7,19 +7,17 @@
     "customizations": {
         "vscode": {
     "extensions": [
-                "llvm-vs-code-extensions.vscode-clangd",
-                "ms-vscode.cpptools-extension-pack",
-                "cschlosser.doxdocgen"
-            ],
+        "llvm-vs-code-extensions.vscode-clangd",
+        "ms-vscode.cpptools-extension-pack",
+        "cschlosser.doxdocgen",
+        "DrBlury.protobuf-vsc"
+    ],
             "settings": {
                 "files.associations": {
                     "*.ino": "cpp"
                 },
 				"C_Cpp.intelliSenseEngine": "disabled",
 				"clangd.arguments": [
-                    "--compile-commands-dir=build/ino_mcu",
-                    "--query-driver=/root/.arduino15/packages/zephyr/tools/arm-zephyr-eabi/**",
-                    "--background-index",
                     "--header-insertion=never"
                 ],
                 "cmake.additionalKits": ["/opt/toolchains/cmake-kits.json"]

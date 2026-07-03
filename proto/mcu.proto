@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+message LedRequest {
+    bool on = 1;
+}
+
+message MatrixRequest {
+    // Expected 104 pixels for an 8x13 matrix.
+    repeated uint32 pixels = 1;
+}
+
+
+service McuService {
+    rpc SetLed(LedRequest) returns (google.protobuf.Empty);
+    rpc SetMatrix(MatrixRequest) returns (google.protobuf.Empty);
+}

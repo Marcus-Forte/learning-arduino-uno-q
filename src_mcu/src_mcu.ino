@@ -1,31 +1,59 @@
 #include <Arduino.h>
+#include "Arduino_RouterBridge.h"
+#include <Arduino_LED_Matrix.h>
+#include <array>
+
+// Matrix is 8x13 pixels.
+
+Arduino_LED_Matrix matrix;
+
+volatile uint32_t g_set_matrix_calls = 0;
+
+void set_led_state(bool state);
+void set_matrix(std::array<uint8_t, 104> pixels);
+
+uint8_t logo[104] = {
+    0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,1,1,1,0,0,0,1,1,1,0,0,
+    0,1,0,0,0,1,0,1,0,0,0,1,0,
+    1,0,0,0,0,0,1,0,0,1,0,0,1,
+    1,0,1,1,1,0,1,0,1,1,1,0,1,
+    1,0,0,0,0,0,1,0,0,1,0,0,1,
+    0,1,0,0,0,1,0,1,0,0,0,1,0,
+    0,0,1,1,1,0,0,0,1,1,1,0,0
+};
 
 void setup() {
-  // Initialize serial communication at 115200 bits per second:
-  Serial.begin(115200);
-  
-  // Wait for the serial port to connect. 
-  // This is often necessary for boards with native USB (like the UNO Q)
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB
-  }
+  pinMode(LED3_R, OUTPUT);
+  pinMode(LED3_B, OUTPUT);
 
-  pinMode(LED_BUILTIN, OUTPUT);
-  
-  Serial.println("Arduino UNO Q serial initialized!");
+  digitalWrite(LED3_B, LOW); // Turn off the blue LED initially
+
+  matrix.begin();
+
+  matrix.setGrayscaleBits(1);
+  matrix.draw(logo);
+
+  Bridge.begin();
+  Bridge.provide_safe("set_led_state", set_led_state);
+  Bridge.provide_safe("set_matrix", set_matrix);
 }
 
 void loop() {
-  // Print a message to the serial monitor:
-  Serial.println("Hello from the MCU!");
+  // Keep loop responsive so provide_safe callbacks can execute quickly.
+  delay(1);
+}
 
-  // Toggle LED and print its state
-  digitalWrite(LED_BUILTIN, HIGH);
-  Serial.println("LED: ON");
-  delay(1000);
-  digitalWrite(LED_BUILTIN, LOW);
-  Serial.println("LED: OFF");
-  
-  // Wait for 500 milliseconds:
-  delay(1000);
+void set_led_state(bool state) {
+    // LOW state means LED is ON
+    digitalWrite(LED3_B, state ? LOW : HIGH);
+}
+
+void set_matrix(std::array<uint8_t, 104> pixels) {
+    ++g_set_matrix_calls;
+
+    matrix.draw(pixels.data());
+
+    // Clear debug latch on successful draw.
+    digitalWrite(LED3_R, HIGH);
 }
