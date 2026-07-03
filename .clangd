@@ -1,0 +1,24 @@
+CompileFlags:
+  CompilationDatabase: build/ino_mcu
+  Remove:
+    - -mfp16-format=*
+    - -fno-reorder-functions
+
+---
+If:
+  PathMatch: .*\.ino$
+CompileFlags:
+  CompilationDatabase: None
+  Add:
+    - -x
+    - c++
+    - -std=gnu++17
+    - -DARDUINO=10607
+    - -DARDUINO_UNO_Q
+    - -DARDUINO_ARCH_ZEPHYR
+    - -I/root/.arduino15/packages/arduino/hardware/zephyr/0.56.0/cores/arduino
+    - -I/root/.arduino15/packages/arduino/hardware/zephyr/0.56.0/variants/arduino_uno_q_stm32u585xx
+    - -I/root/.arduino15/packages/arduino/hardware/zephyr/0.56.0/cores/arduino/api/deprecated
+    - -I/root/.arduino15/packages/arduino/hardware/zephyr/0.56.0/cores/arduino/api/deprecated-avr-comp
+    - -include
+    - Arduino.h
