@@ -1,8 +1,10 @@
 {
     "name": "devcontainer",
+    "postCreateCommand": "ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa",
     "build": {
         "dockerfile": "Dockerfile",
-        "context": ".."
+        "context": "..",
+        "target": "dev"
     },
     "customizations": {
         "vscode": {

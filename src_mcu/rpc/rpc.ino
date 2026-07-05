@@ -1,5 +1,5 @@
-#include <Arduino.h>
 #include "Arduino_RouterBridge.h"
+#include <Arduino.h>
 #include <Arduino_LED_Matrix.h>
 #include <array>
 
@@ -12,15 +12,13 @@ volatile uint32_t g_set_matrix_calls = 0;
 void set_led_state(bool state);
 void set_matrix(std::array<uint8_t, 104> pixels);
 
-uint8_t logo[104] = {
-    0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,1,1,1,0,0,0,1,1,1,0,0,
-    0,1,0,0,0,1,0,1,0,0,0,1,0,
-    1,0,0,0,0,0,1,0,0,1,0,0,1,
-    1,0,1,1,1,0,1,0,1,1,1,0,1,
-    1,0,0,0,0,0,1,0,0,1,0,0,1,
-    0,1,0,0,0,1,0,1,0,0,0,1,0,
-    0,0,1,1,1,0,0,0,1,1,1,0,0
+uint8_t logo[104] = {1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0,
+                     0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0,
+                     0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0,
+                     0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+                     0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1,
+                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+
 };
 
 void setup() {
@@ -45,15 +43,15 @@ void loop() {
 }
 
 void set_led_state(bool state) {
-    // LOW state means LED is ON
-    digitalWrite(LED3_B, state ? LOW : HIGH);
+  // LOW state means LED is ON
+  digitalWrite(LED3_B, state ? LOW : HIGH);
 }
 
 void set_matrix(std::array<uint8_t, 104> pixels) {
-    ++g_set_matrix_calls;
+  ++g_set_matrix_calls;
 
-    matrix.draw(pixels.data());
+  matrix.draw(pixels.data());
 
-    // Clear debug latch on successful draw.
-    digitalWrite(LED3_R, HIGH);
+  // Clear debug latch on successful draw.
+  digitalWrite(LED3_R, HIGH);
 }

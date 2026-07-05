@@ -3,6 +3,12 @@ CompileFlags:
 
 ---
 If:
-  PathMatch: .*src_mcu/.*
+  PathMatch: .*src_mcu/rpc/.*
 CompileFlags:
-  CompilationDatabase: build/ino_mcu
+  CompilationDatabase: build/ino_rpc
+
+---
+If:
+  PathMatch: .*src_mcu/hello/.*
+CompileFlags:
+  CompilationDatabase: build/ino_hello

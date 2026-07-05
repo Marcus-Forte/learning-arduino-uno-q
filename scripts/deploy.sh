@@ -1,12 +1,10 @@
 # Upload firmware to Arduino Uno Q1 MCU
-
+USER=arduino
 IP=192.168.178.188
 
-# Deploy MPU App
-scp build/learning_arduino_q1 arduino@$IP:/tmp/learning_arduino_q1
+# Deploy Application
 
+ssh $USER@$IP mkdir -p /tmp/firmware/
+scp -r build/install/. $USER@$IP:/tmp/firmware/
 
-# Deploy MCU App
-ssh arduino@$IP mkdir -p /tmp/firmware
-scp build/ino_mcu/*.elf-zsk.bin arduino@$IP:/tmp/firmware/firmware.elf-zsk.bin
-ssh arduino@$IP arduino-cli upload -i /tmp/firmware/ -b arduino:zephyr:unoq -v
+# Once deployed, call `arduino-cli upload -b arduino:zephyr:unoq -i ino_hello/`
