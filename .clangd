@@ -12,3 +12,9 @@ If:
   PathMatch: .*src_mcu/hello/.*
 CompileFlags:
   CompilationDatabase: build/ino_hello
+
+---
+If:
+  PathMatch: .*src_mcu/rtos/.*
+CompileFlags:
+  CompilationDatabase: build/ino_rtos

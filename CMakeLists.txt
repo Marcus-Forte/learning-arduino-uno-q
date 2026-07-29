@@ -14,6 +14,7 @@ include(format)
 
 add_arduino_cli_compile_target(src_mcu/rpc)
 add_arduino_cli_compile_target(src_mcu/hello)
+add_arduino_cli_compile_target(src_mcu/rtos)
 
 find_package(msgpack-cxx REQUIRED)
 
