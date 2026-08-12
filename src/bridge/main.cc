@@ -6,6 +6,8 @@
 
 #include "bridge.hh"
 
+#include "mcu_service_simulator.hh"
+
 #include "google/protobuf/empty.pb.h"
 #include "mcu.grpc.pb.h"
 
@@ -64,7 +66,7 @@ private:
 int main() {
 
   const std::string server_address("0.0.0.0:50051");
-  McuServiceImpl service;
+  McuServiceSimulator service;
 
   grpc::ServerBuilder builder;
   builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());

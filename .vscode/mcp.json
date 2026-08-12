@@ -1,0 +1,18 @@
+{
+	"servers": {
+		"arduino-led-matrix-server": {
+			"description": "Controls an 8-row × 13-column (104 pixels) Arduino UNO Q LED matrix. For shapes use draw_rectangle(x, y, width, height). Use draw_led_matrix only when you have exactly 104 pixel values in row-major order (index = row*13 + col).",
+			"type": "stdio",
+			"cwd": "${workspaceFolder}/client",
+			"command": "uv",
+			"args": [
+				"run",
+				"server.py"
+			],
+			"env": { 
+       			 "MCU_GRPC_TARGET": "localhost:50051" // Change for the Uno IP
+      		}
+		}
+	},
+	"inputs": []
+}

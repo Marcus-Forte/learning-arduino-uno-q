@@ -12,7 +12,7 @@ include(generate_proto)
 include(arduino_cli_targets)
 include(format)
 
-add_arduino_cli_compile_target(src_mcu/rpc)
+add_arduino_cli_compile_target(src_mcu/bridge)
 add_arduino_cli_compile_target(src_mcu/hello)
 add_arduino_cli_compile_target(src_mcu/rtos)
 
@@ -34,6 +34,7 @@ install(TARGETS hello DESTINATION "${CMAKE_INSTALL_BINDIR}")
 add_executable(bridge
     src/bridge/main.cc
     src/bridge/bridge.cc
+    src/bridge/mcu_service_simulator.cc
 )
 target_link_libraries(bridge mcu_rpc msgpack-cxx)
 install(TARGETS bridge DESTINATION "${CMAKE_INSTALL_BINDIR}")

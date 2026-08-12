@@ -14,16 +14,15 @@
         "cschlosser.doxdocgen",
         "DrBlury.protobuf-vsc"
     ],
-            "settings": {
-                "files.associations": {
-                    "*.ino": "cpp"
-                },
-				"C_Cpp.intelliSenseEngine": "disabled",
-				"clangd.arguments": [
-                    "--header-insertion=never"
-                ],
-                "cmake.additionalKits": ["/opt/toolchains/cmake-kits.json"]
-			}
-        }
+    "settings": {
+        "files.associations": {
+            "*.ino": "cpp"
+        },
+        "C_Cpp.intelliSenseEngine": "disabled",
+        "clangd.arguments": [
+            "--header-insertion=never"
+        ]
     }
+}
+}
 }
