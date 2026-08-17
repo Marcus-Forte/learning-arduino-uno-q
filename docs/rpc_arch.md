@@ -5,7 +5,7 @@ This document illustrates the current hybrid RPC application: a Linux-side gRPC 
 ## Deployment diagram
 
 ```mermaid
-flowchart LR
+flowchart TD
     subgraph Client["gRPC Client"]
         gRPCClient["gRPC client / test app"]
     end
@@ -17,14 +17,16 @@ flowchart LR
     end
 
     subgraph ArduinoDevice["UNO Q MCU"]
-        RouterBridge["Arduino RouterBridge library"] --> Firmware["Firmware sketch\nsrc_mcu/rpc/rpc.ino"]
-        Firmware --> |Draw LEDs| Hardware["LED matrix"]
+        RouterBridge["Arduino RouterBridge library"] --> Firmware["Firmware sketch\nsrc_mcu/bridge/bridge.ino"]
     end
+
+    Hardware["LED matrix"]
 
     gRPCClient -->|grpc.setMatrix| Server
     Server --> Bridge
     Bridge --> RouterSock
-    RouterSock --> |setMatrix| RouterBridge
+    RouterSock --> |bridge.setMatrix| RouterBridge
+    Firmware --> |Draw LEDs| Hardware
 ```
 
 ## Data flow

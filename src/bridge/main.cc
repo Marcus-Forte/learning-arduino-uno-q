@@ -66,7 +66,8 @@ private:
 int main() {
 
   const std::string server_address("0.0.0.0:50051");
-  McuServiceSimulator service;
+  // McuServiceSimulator service;
+  McuServiceImpl service;
 
   grpc::ServerBuilder builder;
   builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());

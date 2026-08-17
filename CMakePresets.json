@@ -13,5 +13,12 @@
                 "CMAKE_BUILD_TYPE": "Release"
             }
         }
+    ],
+    "buildPresets": [
+        {
+            "name": "default",
+            "configurePreset": "preset",
+            "verbose": true
+        }
     ]
 }

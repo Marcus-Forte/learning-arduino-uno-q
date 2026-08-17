@@ -3,9 +3,9 @@ CompileFlags:
 
 ---
 If:
-  PathMatch: .*src_mcu/rpc/.*
+  PathMatch: .*src_mcu/bridge/.*
 CompileFlags:
-  CompilationDatabase: build/ino_rpc
+  CompilationDatabase: build/ino_bridge
 
 ---
 If:
